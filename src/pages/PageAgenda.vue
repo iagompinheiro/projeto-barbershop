@@ -8,7 +8,8 @@
         <q-form @submit.prevent="handleAgendamento">
           <q-input v-model="clienteNome" label="Nome do Cliente" />
           <q-select v-model="horaAgendamento" :options="horarios" label="Horário" />
-          <q-btn type="submit" label="Agendar" color="primary" />
+          <q-btn v-if="!editandoAgendamentoId" type="submit" label="Agendar" color="primary" />
+          <q-btn v-else type="button" @click="confirmUpdateAgendamento" label="Atualizar" color="primary" />
         </q-form>
       </div>
     </div>
@@ -19,6 +20,10 @@
         <q-item-section>
           <q-item-label>{{ agendamento.nome }}</q-item-label>
           <q-item-label caption>{{ agendamento.data }} às {{ agendamento.horario }}</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-btn icon="edit" @click="editAgendamento(agendamento)" />
+          <q-btn icon="delete" color="negative" @click="handleDeleteAgendamento(agendamento.id)" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -35,6 +40,7 @@ export default {
       clienteNome: '',
       dataAgendamento: '',
       horaAgendamento: '',
+      editandoAgendamentoId: null,
       horarios: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00']
     };
   },
@@ -42,23 +48,63 @@ export default {
     ...mapState('agendamentos', ['agendamentos'])
   },
   methods: {
-    ...mapActions('agendamentos', ['agendarHorario']),
+    ...mapActions('agendamentos', ['agendarHorario', 'updateAgendamento', 'deleteAgendamento']),
     handleAgendamento() {
       if (this.clienteNome && this.dataAgendamento && this.horaAgendamento) {
-        this.agendarHorario({
+        const agendamento = {
           nome: this.clienteNome,
           data: this.dataAgendamento,
           horario: this.horaAgendamento
-        }).then(() => {
-          this.clienteNome = '';
-          this.dataAgendamento = '';
-          this.horaAgendamento = '';
-        }).catch(error => {
-          console.error('Falha ao agendar horário:', error);
-        });
+        };
+        if (this.editandoAgendamentoId === null) {
+          this.agendarHorario(agendamento)
+            .then(() => {
+              this.resetForm();
+            })
+            .catch(error => {
+              console.error('Falha ao agendar horário:', error);
+            });
+        }
       } else {
         alert('Por favor, preencha todos os campos');
       }
+    },
+    confirmUpdateAgendamento() {
+      if (this.clienteNome && this.dataAgendamento && this.horaAgendamento) {
+        const updatedAgendamento = {
+          id: this.editandoAgendamentoId,
+          nome: this.clienteNome,
+          data: this.dataAgendamento,
+          horario: this.horaAgendamento
+        };
+        this.updateAgendamento(updatedAgendamento)
+          .then(() => {
+            this.resetForm();
+          })
+          .catch(error => {
+            console.error('Falha ao atualizar agendamento:', error);
+          });
+      } else {
+        alert('Por favor, preencha todos os campos');
+      }
+    },
+    editAgendamento(agendamento) {
+      this.clienteNome = agendamento.nome;
+      this.dataAgendamento = agendamento.data;
+      this.horaAgendamento = agendamento.horario;
+      this.editandoAgendamentoId = agendamento.id;
+    },
+    handleDeleteAgendamento(agendamentoId) {
+      this.deleteAgendamento(agendamentoId)
+        .catch(error => {
+          console.error('Falha ao deletar agendamento:', error);
+        });
+    },
+    resetForm() {
+      this.clienteNome = '';
+      this.dataAgendamento = '';
+      this.horaAgendamento = '';
+      this.editandoAgendamentoId = null;
     }
   }
 };
