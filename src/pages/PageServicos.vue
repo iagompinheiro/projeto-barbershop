@@ -1,12 +1,17 @@
 <template>
   <q-page padding class="bg-page">
-    <h1 class="titulo">Quem somos</h1>
-   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem quasi nesciunt facilis harum, labore veritatis minus temporibus consequuntur laboriosam. Repellat reiciendis aspernatur adipisci ea, asperiores obcaecati. Praesentium illo reprehenderit quibusdam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio voluptates saepe suscipit nisi quis laboriosam, rerum eaque in quos animi nobis sequi itaque omnis repellendus quisquam et dolor quas harum! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima repellat quo ipsa cupiditate dignissimos repellendus deserunt, consectetur doloribus minus similique ad rem quas quaerat voluptatum debitis magni! Aliquid, praesentium deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque optio corrupti, quisquam laudantium cum odio dolore tempora architecto dignissimos ea voluptatibus harum error maiores sit iusto non nisi autem sapiente.</p>
-
-
-   <div>
-    <img src="../assets/images/bruno.jpeg.jpeg" alt="">
-   </div>
+    <div class="q-pa-md row justify-center">
+      <div class="col-12 col-md-8 text-center">
+        <h1 class="titulo">Quem somos</h1>
+        <p class="desc">
+          Nossa barbearia é especializada em cortes de cabelo e barba, destacando-se pelo domínio do estilo fade. Oferecemos uma experiência excepcional aos nossos clientes, combinando técnica apurada, atendimento personalizado e um ambiente acolhedor. <br> 
+          Nossos barbeiros são altamente capacitados e estão sempre atualizados com as últimas tendências e técnicas do mercado, garantindo que cada cliente receba um corte de qualidade superior. Além disso, utilizamos produtos de alta qualidade para cuidar da saúde dos cabelos e da pele, proporcionando um resultado duradouro e satisfatório.
+        </p>
+        <div class="q-mt-lg">
+          <img src="../assets/images/bruno.jpeg.jpeg" alt="Imagem de barbearia" class="full-width">
+        </div>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -30,6 +35,16 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
  }
+
+ .desc {
+  
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  
+  text-align: justify;  
+ }
+
+
 p {
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
@@ -37,12 +52,10 @@ p {
 }
 
 
-
-img {
-  width: 600px;
-  margin: auto;
-  display: block;
-}
+.full-width {
+    width: 100%;
+    max-width: 300px; /* Você pode ajustar o tamanho máximo da imagem conforme necessário */
+  }
 
 
 </style>
