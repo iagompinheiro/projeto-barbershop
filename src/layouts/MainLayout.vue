@@ -82,6 +82,8 @@
           </q-item-section>
         </q-item>
 
+      
+
 
         <EssentialLink
           class="list"
@@ -116,6 +118,13 @@ const linksList = [
     icon: "share_location",
     link: "https://www.google.com/maps/place/R.+Juriti,+35+-+Passo+das+Pedras,+Gravata%C3%AD+-+RS/@-29.9422875,-51.0080517,17z/data=!3m1!4b1!4m5!3m4!1s0x95190b49c16cdb0b:0x47cd965a09622666!8m2!3d-29.9422875!4d-51.0054768?entry=ttu",
   },
+
+  {
+    title:"Instagram", 
+    caption: "", 
+    icon:"link", 
+    link:"https://www.instagram.com/bruno_marianobarber?igsh=bzh1Z200NjhhOG9h"
+  }
 ];
 
 const leftDrawerOpen = ref(false);
